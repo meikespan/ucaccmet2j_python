@@ -17,30 +17,24 @@ for measurement in measurements:
     if measurement['station'] == 'GHCND:US1WAKG0038':
         measurements_seattle.append(measurement)
 
-
-#dividing up our measurements into groups of months
+print(len(measurements_seattle))
 
 #from looking at our data, i know all of our data was collected in the year 2010, so each date will start with 2010-month
 total_monthly_precipitation = [0,0,0,0,0,0,0,0,0,0,0,0,] #creating a list in which we will collect our data, starting at 0 for each month
 
-for i in range(1,13): #for each month
+for i in range(1,10): #for our single-digit months, so january - september
     for measurement in measurements_seattle: #for each measurement
         if  measurement['date'].startswith(f'2010-0{i}'): #if that measurement is in that month
             total_monthly_precipitation[i-1] += measurement['value'] #add the value up to the corresponding item in our list
 
+for i in range(10,13): #for october - december
+    for measurement in measurements_seattle: #for each measurement
+        if  measurement['date'].startswith(f'2010-{i}'): #if that measurement is in that month
+            total_monthly_precipitation[i-1] += measurement['value'] #add the value up to the corresponding item in our list
 
 
-# for measurement in measurements_seattle:
-#     if  measurement['date'].startswith('2010-01'):
-#         sum_january += float(measurement['value'])
-# total_monthly_precipitation.append(sum_january)
-
-# for measurement in measurements_seattle:
-#     if  measurement['date'].startswith('2010-02'):
-#         sum_february += float(measurement['value'])
-# total_monthly_precipitation.append(sum_february)
+with open('results.json', 'w') as f:
+    json.dump(total_monthly_precipitation, f, indent=4)
 
 
-
-print(total_monthly_precipitation)
 
