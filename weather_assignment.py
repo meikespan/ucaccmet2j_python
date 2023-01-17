@@ -53,9 +53,13 @@ for i in range(1,13):
 # outputting our data into our json file
 
 results = {
+    "Seattle" : {
+        'station': 'GHCND:US1WAKG0038',
+        'state': 'WA',
         'total_monthly precipitation': total_monthly_precipitation,
         'total_yearly_precipitation' : total_yearly_precipitation,
         'relative_monthly_precipitation' :relative_monthly_precipitation
+    }
 }
 
 with open('results.json', 'w') as f:
